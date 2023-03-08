@@ -2,10 +2,10 @@ package autoretaliatewarning;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import javax.inject.Inject;
-import static net.runelite.api.MenuAction.RUNELITE_OVERLAY_CONFIG;
-import static net.runelite.client.ui.overlay.OverlayManager.OPTION_CONFIGURE;
+import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.TitleComponent;
@@ -27,20 +27,34 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		graphics.setFont(new Font(FontManager.getRunescapeFont().getName(), Font.PLAIN, config.fontSize()));
+		String autoRetaliateWarning = "AUTO RETALIATE IS SELECTED";
+		String NPCAttackWarning = "NPC ATTACK OPTIONS NOT HIDDEN";
 		boolean autoRetaliateSelected = plugin.getAutoRetaliateStatus();
-		if (autoRetaliateSelected) {
-		panelComponent.getChildren().add(TitleComponent.builder()
-			.text("AUTO RETALIATE IS SELECTED")
-			.color(Color.RED)
-			.build());
+		boolean getNPCAttackSelected = plugin.getNPCAttackOptions();
+
+		if (autoRetaliateSelected && config.autoRetaliateWarn())
+		{
+			panelComponent.getChildren().add(TitleComponent.builder()
+				.text(autoRetaliateWarning)
+				.color(Color.RED)
+				.build());
+		}
+
+		if (getNPCAttackSelected && config.npcAttackOptionsWarn())
+		{
+			panelComponent.getChildren().add(TitleComponent.builder()
+				.text(NPCAttackWarning)
+				.color(Color.RED)
+				.build());
+		}
 
 		panelComponent.setPreferredSize(new Dimension(
-			graphics.getFontMetrics().stringWidth("AUTO RETALIATE IS SELECTED") + 10,
-			0));
+			graphics.getFontMetrics().stringWidth(NPCAttackWarning) + 10,
+			graphics.getFontMetrics().getHeight()));
+
 
 		return super.render(graphics);
-	}
-		return null;
 	}
 }
 

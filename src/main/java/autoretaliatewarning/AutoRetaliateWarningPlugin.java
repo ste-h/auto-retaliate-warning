@@ -3,7 +3,6 @@ package autoretaliatewarning;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameStateChanged;
@@ -13,20 +12,21 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 
 @Slf4j
 @PluginDescriptor(
-	name = "Auto Retaliate Warning"
+	name = "Auto Retaliate Warning",
+	description = "Warns you when you have auto retaliate on, or NPC attack options not hidden. Helps to prevent misclicks on limited accounts.",
+	tags = {"hidden", "attack options", "retaliate", "auto", "auto retaliate", "warning"}
 )
-
 
 public class AutoRetaliateWarningPlugin extends Plugin
 {
 	private final int AUTO_RETALIATE_VARBIT = 172;
+	private final int NPC_ATTACK_OPTIONS_VARBIT = 1306;
 	@Inject
 	private Client client;
 
@@ -85,6 +85,10 @@ public class AutoRetaliateWarningPlugin extends Plugin
 
 	public boolean getAutoRetaliateStatus() {
 		return client.getVarpValue(AUTO_RETALIATE_VARBIT) == 0;
+	}
+
+	public boolean getNPCAttackOptions() {
+		return client.getVarpValue(NPC_ATTACK_OPTIONS_VARBIT) != 3;
 	}
 }
 

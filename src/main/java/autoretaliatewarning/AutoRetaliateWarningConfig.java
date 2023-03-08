@@ -8,6 +8,27 @@ import net.runelite.client.config.ConfigItem;
 public interface AutoRetaliateWarningConfig extends Config
 {
 	@ConfigItem(
+		position = 1,
+		keyName = "npcAttackOptionsWarn",
+		name = "Warn NPC attack options",
+		description = "Warns you when NPC attack options aren't hidden"
+	)
+	default boolean npcAttackOptionsWarn()
+	{
+		return true;
+	}
+	@ConfigItem(
+		position = 2,
+		keyName = "autoRetaliateWarn",
+		name = "Warn Auto Retaliate",
+		description = "Warns you when you have auto retaliate enabled"
+	)
+	default boolean autoRetaliateWarn()
+	{
+		return true;
+	}
+	@ConfigItem(
+		position = 3,
 		keyName = "hideRetaliateConfig",
 		name = "Hide Auto Retaliate",
 		description = "Hides the auto retaliate button"
@@ -15,5 +36,15 @@ public interface AutoRetaliateWarningConfig extends Config
 	default boolean hideRetaliateConfig()
 	{
 		return false;
+	}
+	@ConfigItem(
+		position = 4,
+		keyName = "fontSize",
+		name = "Font Size",
+		description = "Changes the warnings font size"
+	)
+	default int fontSize()
+	{
+		return 20;
 	}
 }
