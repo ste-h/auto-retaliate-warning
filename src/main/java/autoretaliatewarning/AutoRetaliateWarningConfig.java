@@ -28,7 +28,17 @@ public interface AutoRetaliateWarningConfig extends Config
 		return true;
 	}
 	@ConfigItem(
-		position = 3,
+			position = 3,
+			keyName = "autoRetaliateOffWarn",
+			name = "Warn Auto Retaliate Off",
+			description = "Warns you when you have auto retaliate disabled"
+	)
+	default boolean autoRetaliateOffWarn()
+	{
+		return true;
+	}
+	@ConfigItem(
+		position = 4,
 		keyName = "hideRetaliateConfig",
 		name = "Hide Auto Retaliate",
 		description = "Hides the auto retaliate button"
@@ -38,7 +48,7 @@ public interface AutoRetaliateWarningConfig extends Config
 		return false;
 	}
 	@ConfigItem(
-		position = 4,
+		position = 5,
 		keyName = "fontSize",
 		name = "Font Size",
 		description = "Changes the warnings font size"
