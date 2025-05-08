@@ -12,14 +12,16 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.ComponentID;
 import net.runelite.client.ui.overlay.OverlayManager;
+
+import java.awt.*;
 
 
 @Slf4j
 @PluginDescriptor(
 	name = "Auto Retaliate Warning",
-	description = "Warns you when you have auto retaliate on, or NPC attack options not hidden. Helps to prevent misclicks on limited accounts.",
+	description = "Warns you when you have auto retaliate on/off, or NPC attack options not hidden. Helps to prevent misclicks on limited accounts.",
 	tags = {"hidden", "attack options", "retaliate", "auto", "auto retaliate", "warning"}
 )
 
@@ -42,14 +44,14 @@ public class AutoRetaliateWarningPlugin extends Plugin
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event)
 	{
-		hideWidget(client.getWidget(WidgetInfo.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
 	}
 
 	@Override
 	protected void startUp() throws Exception
 	{
 		overlayManager.add(overlay);
-		hideWidget(client.getWidget(WidgetInfo.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
 	}
 
 	@Override
@@ -57,7 +59,7 @@ public class AutoRetaliateWarningPlugin extends Plugin
 	{
 		overlayManager.remove(overlay);
 		log.info("Auto Retaliate Warning stopped!");
-		hideWidget(client.getWidget(WidgetInfo.COMBAT_AUTO_RETALIATE), false);
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), false);
 	}
 
 	@Subscribe
