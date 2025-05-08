@@ -15,9 +15,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.api.widgets.ComponentID;
 import net.runelite.client.ui.overlay.OverlayManager;
 
-import java.awt.*;
-
-
 @Slf4j
 @PluginDescriptor(
 	name = "Auto Retaliate Warning",
