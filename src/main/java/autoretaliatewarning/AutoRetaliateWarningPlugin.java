@@ -12,9 +12,8 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.ui.overlay.OverlayManager;
-
+import net.runelite.api.widgets.ComponentID;
 
 @Slf4j
 @PluginDescriptor(
@@ -42,23 +41,20 @@ public class AutoRetaliateWarningPlugin extends Plugin
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event)
 	{
-		hideWidget(client.getWidget(WidgetInfo.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
-	}
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());	}
 
 	@Override
 	protected void startUp() throws Exception
 	{
 		overlayManager.add(overlay);
-		hideWidget(client.getWidget(WidgetInfo.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
-	}
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
 		overlayManager.remove(overlay);
 		log.info("Auto Retaliate Warning stopped!");
-		hideWidget(client.getWidget(WidgetInfo.COMBAT_AUTO_RETALIATE), false);
-	}
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), false);	}
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged)

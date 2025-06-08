@@ -29,6 +29,7 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 	{
 		graphics.setFont(new Font(FontManager.getRunescapeFont().getName(), Font.PLAIN, config.fontSize()));
 		String autoRetaliateWarning = "AUTO RETALIATE IS SELECTED";
+		String autoRetaliateOffWarning = "AUTO RETALIATE IS OFF";
 		String NPCAttackWarning = "NPC ATTACK OPTIONS NOT HIDDEN";
 		boolean autoRetaliateSelected = plugin.getAutoRetaliateStatus();
 		boolean getNPCAttackSelected = plugin.getNPCAttackOptions();
@@ -37,6 +38,13 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text(autoRetaliateWarning)
+				.color(Color.RED)
+				.build());
+		}
+		if (!autoRetaliateSelected && config.autoRetaliateOffWarn())
+		{
+			panelComponent.getChildren().add(TitleComponent.builder()
+				.text(autoRetaliateOffWarning)
 				.color(Color.RED)
 				.build());
 		}
