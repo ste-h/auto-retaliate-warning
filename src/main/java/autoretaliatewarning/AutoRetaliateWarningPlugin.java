@@ -18,7 +18,7 @@ import net.runelite.api.widgets.ComponentID;
 @Slf4j
 @PluginDescriptor(
 	name = "Auto Retaliate Warning",
-	description = "Warns you when you have auto retaliate on, or NPC attack options not hidden. Helps to prevent misclicks on limited accounts.",
+	description = "Warns you when you have auto retaliate on / off, or NPC attack options not hidden. Helps to prevent misclicks on limited accounts.",
 	tags = {"hidden", "attack options", "retaliate", "auto", "auto retaliate", "warning"}
 )
 
