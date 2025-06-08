@@ -41,27 +41,29 @@ public class AutoRetaliateWarningPlugin extends Plugin
 	@Subscribe
 	public void onConfigChanged(ConfigChanged event)
 	{
-		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());	}
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
+	}
 
 	@Override
 	protected void startUp() throws Exception
 	{
 		overlayManager.add(overlay);
-		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());	}
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), config.hideRetaliateConfig());
+	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
 		overlayManager.remove(overlay);
 		log.info("Auto Retaliate Warning stopped!");
-		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), false);	}
+		hideWidget(client.getWidget(ComponentID.COMBAT_AUTO_RETALIATE), false);
+	}
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged)
 	{
 		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
 		{
-			return;
 		}
 	}
 
@@ -79,11 +81,13 @@ public class AutoRetaliateWarningPlugin extends Plugin
 		}
 	}
 
-	public boolean getAutoRetaliateStatus() {
+	public boolean getAutoRetaliateStatus()
+	{
 		return client.getVarpValue(AUTO_RETALIATE_VARBIT) == 0;
 	}
 
-	public boolean getNPCAttackOptions() {
+	public boolean getNPCAttackOptions()
+	{
 		return client.getVarpValue(NPC_ATTACK_OPTIONS_VARBIT) != 3;
 	}
 }
