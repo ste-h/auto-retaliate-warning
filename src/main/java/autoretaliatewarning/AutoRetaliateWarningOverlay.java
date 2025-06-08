@@ -28,9 +28,12 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 	public Dimension render(Graphics2D graphics)
 	{
 		graphics.setFont(new Font(FontManager.getRunescapeFont().getName(), Font.PLAIN, config.fontSize()));
-		String autoRetaliateWarning = "AUTO RETALIATE IS SELECTED";
-		String autoRetaliateOffWarning = "AUTO RETALIATE IS OFF";
-		String NPCAttackWarning = "NPC ATTACK OPTIONS NOT HIDDEN";
+
+		// Get custom text from config
+		String autoRetaliateWarning = config.autoRetaliateText();
+		String autoRetaliateOffWarning = config.autoRetaliateOffText();
+		String npcAttackWarning = config.npcAttackOptionsText();
+
 		boolean autoRetaliateSelected = plugin.getAutoRetaliateStatus();
 		boolean getNPCAttackSelected = plugin.getNPCAttackOptions();
 
@@ -52,17 +55,30 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 		if (getNPCAttackSelected && config.npcAttackOptionsWarn())
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
-				.text(NPCAttackWarning)
+				.text(npcAttackWarning)
 				.color(Color.RED)
 				.build());
 		}
 
+		// Calculate the preferred size based on the longest possible text
+		String longestText = getLongestText(autoRetaliateWarning, autoRetaliateOffWarning, npcAttackWarning);
 		panelComponent.setPreferredSize(new Dimension(
-			graphics.getFontMetrics().stringWidth(NPCAttackWarning) + 10,
+			graphics.getFontMetrics().stringWidth(longestText) + 10,
 			graphics.getFontMetrics().getHeight()));
-
 
 		return super.render(graphics);
 	}
-}
 
+	private String getLongestText(String... texts)
+	{
+		String longest = "";
+		for (String text : texts)
+		{
+			if (text.length() > longest.length())
+			{
+				longest = text;
+			}
+		}
+		return longest;
+	}
+}
