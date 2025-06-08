@@ -41,14 +41,14 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text(autoRetaliateWarning)
-				.color(Color.RED)
+				.color(config.autoRetaliateColor())
 				.build());
 		}
 		if (!autoRetaliateSelected && config.autoRetaliateOffWarn())
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text(autoRetaliateOffWarning)
-				.color(Color.RED)
+				.color(config.autoRetaliateOffColor())
 				.build());
 		}
 
@@ -56,7 +56,7 @@ public class AutoRetaliateWarningOverlay extends OverlayPanel
 		{
 			panelComponent.getChildren().add(TitleComponent.builder()
 				.text(npcAttackWarning)
-				.color(Color.RED)
+				.color(config.npcAttackOptionsColor())
 				.build());
 		}
 
